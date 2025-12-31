@@ -1,49 +1,69 @@
 #include <stdio.h>
 
+// Function declarations
+void add(float a, float b);
+void subtract(float a, float b);
+void multiply(float a, float b);
+void divide(float a, float b);
+
 int main() {
-    int units;
-    float bill = 0.0;
-    float fixedCharge = 50.0;
-    float duty, total;
+    int choice;
+    float num1, num2;
 
-    // Input units
-    printf("Enter total units consumed: ");
-    scanf("%d", &units);
+    // Menu
+    printf("====== MINI CALCULATOR ======\n");
+    printf("1. Addition\n");
+    printf("2. Subtraction\n");
+    printf("3. Multiplication\n");
+    printf("4. Division\n");
+    printf("=============================\n");
 
-    // Slab-based calculation (step-by-step)
-    if (units <= 100) {
-        bill = units * 1.50;
+    // User choice
+    printf("Enter your choice (1-4): ");
+    scanf("%d", &choice);
+
+    // Input numbers
+    printf("Enter two numbers: ");
+    scanf("%f %f", &num1, &num2);
+
+    // Call function based on choice
+    switch (choice) {
+        case 1:
+            add(num1, num2);
+            break;
+        case 2:
+            subtract(num1, num2);
+            break;
+        case 3:
+            multiply(num1, num2);
+            break;
+        case 4:
+            divide(num1, num2);
+            break;
+        default:
+            printf("Invalid choice!\n");
     }
-    else if (units <= 200) {
-        bill = (100 * 1.50) +
-               ((units - 100) * 2.50);
-    }
-    else if (units <= 300) {
-        bill = (100 * 1.50) +
-               (100 * 2.50) +
-               ((units - 200) * 4.00);
-    }
-    else {
-        bill = (100 * 1.50) +
-               (100 * 2.50) +
-               (100 * 4.00) +
-               ((units - 300) * 6.00);
-    }
-
-    // Electricity duty (5%)
-    duty = bill * 0.05;
-
-    // Final bill
-    total = bill + duty + fixedCharge;
-
-    // Output
-    printf("\n------ Electricity Bill ------\n");
-    printf("Units Consumed   : %d\n", units);
-    printf("Energy Charges   : Rs. %.2f\n", bill);
-    printf("Fixed Charges    : Rs. %.2f\n", fixedCharge);
-    printf("Electricity Duty : Rs. %.2f\n", duty);
-    printf("------------------------------\n");
-    printf("Total Bill       : Rs. %.2f\n", total);
 
     return 0;
+}
+
+// Function definitions
+void add(float a, float b) {
+    printf("Result: %.2f\n", a + b);
+}
+
+void subtract(float a, float b) {
+    printf("Result: %.2f\n", a - b);
+}
+
+void multiply(float a, float b) {
+    printf("Result: %.2f\n", a * b);
+}
+
+void divide(float a, float b) {
+    if (b != 0) {
+        printf("Result: %.2f\n", a / b);
+    } else {
+        printf("Error! Division by zero is not allowed.\n");
+    }
 }
